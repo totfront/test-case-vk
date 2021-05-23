@@ -1,34 +1,23 @@
 import React, { useState } from 'react'
 import '../index.css'
-// import selectors from '../utils/selectors'
 import Header from './Header'
 import Main from './Main'
 import Footer from './Footer'
 import PopupWithForm from './PopupWithForm'
 import PopupWithImage from './PopupWithImage'
 
-const initialPopupState = { isEditAvatarPopupOpen: false, isEditProfilePopupOpen: false, isAddPlacePopupOpen: false }
+const initialPopupState = { isEditAvatarPopupOpen: false, isEditProfilePopupOpen: false, isAddPlacePopupOpen: false, isOverviewPopupOpen: false }
 
 function App() {
   const [popupState, setPopupState] = useState(initialPopupState)
-  // // Смена аватара
-  // const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false)
-  // const handleEditAvatarClick = () => {
-  //   setEditAvatarPopupOpen(true)
-  // }
-  // // Изменение данных профиля
-  // const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false)
-  // const handleEditProfileClick = () => {
-  //   setEditProfilePopupOpen(true)
-  // }
-  // // Добавление карточек
-  // const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false)
-  // const handleAddPlaceClick = () => {
-  //   setAddPlacePopupOpen(true)
-  // }
+  const [selectedCard, setSelectedCard] = useState(null)
+  const handleCardClick = cardData => {
+    setSelectedCard(cardData)
+  }
 
   const closeAllPopups = () => {
     setPopupState(initialPopupState)
+    setSelectedCard(null)
   }
   return (
     <div>
@@ -43,6 +32,10 @@ function App() {
         onAddPlace={() => {
           setPopupState({ ...popupState, isAddPlacePopupOpen: true })
         }}
+        onOverviewPopup={() => {
+          setPopupState({ ...popupState, isOverviewPopupOpen: true })
+        }}
+        onCardClick={handleCardClick}
       />
       <Footer />
       <PopupWithForm title='Редактировать профиль' name='profile-editor' isOpen={popupState.isEditProfilePopupOpen} onClose={closeAllPopups}>
@@ -82,7 +75,7 @@ function App() {
         </div>
       </PopupWithForm>
       <PopupWithForm title='Вы уверены?' name='delete-card' />
-      <PopupWithImage />
+      <PopupWithImage card={selectedCard} isOpen={popupState.isOverviewPopupOpen} onClose={closeAllPopups} />
     </div>
   )
 }

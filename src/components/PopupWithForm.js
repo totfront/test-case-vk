@@ -3,8 +3,6 @@ import closeBtnImage from '../images/popup/close-btn.svg'
 import selectors from '../utils/selectors'
 
 function PopupWithForm(props) {
-  console.log('props.isOpen============')
-  console.log(props.isOpen)
   const closePopup = () => {
     props.onClose()
   }

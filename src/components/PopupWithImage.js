@@ -3,24 +3,25 @@ import closeBtnImage from '../images/popup/close-btn.svg'
 import selectors from '../utils/selectors'
 
 function PopupWithForm(props) {
-  const openedPopupSelector = 'popup_opened'
-  const handleClosePopupBtnClick = e => {
-    const popup = e.target.closest('.' + selectors.popup)
-    closePopup(popup)
-  }
-  const closePopup = popup => {
-    popup.classList.remove(openedPopupSelector)
+  const closePopup = () => {
+    props.onClose()
   }
   const handleOverlayClick = e => {
-    if (e.target.classList.contains('popup_opened')) {
-      closePopup(e.target)
+    if (e.target.classList.contains(selectors.openedPopup)) {
+      closePopup()
+      props.onClose()
     }
   }
+  const handleClosePopupBtnClick = () => {
+    closePopup()
+    props.onClose()
+  }
+  const popupClassName = `popup overview ${props.isOpen && selectors.openedPopup} appearance`
   return (
-    <div onClick={handleOverlayClick} className='popup overview appearance' id='overview'>
+    <div onClick={handleOverlayClick} className={popupClassName} id='overview'>
       <div className='overview__container'>
-        <img className='overview__pic' src='' alt='Фото пейзажа' />
-        <figcaption className='overview__caption'></figcaption>
+        <img className='overview__pic' src={props.card && props.card.link} alt='Фото пейзажа' />
+        <figcaption className='overview__caption'>{props.card && props.card.name}</figcaption>
         <button onClick={handleClosePopupBtnClick} type='button' className='popup__close-btn'>
           <img className='popup__close-pic' src={closeBtnImage} alt='Кнопка закрыть' />
         </button>

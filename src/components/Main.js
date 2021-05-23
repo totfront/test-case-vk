@@ -6,7 +6,6 @@ import Card from './Card'
 function Main(props) {
   const [userData, setUserData] = useState(null)
   const [cardsData, setCardsData] = useState([])
-  let cards
   useEffect(() => {
     const userData = api.getUserData().then(data => {
       setUserData(data)
@@ -37,7 +36,22 @@ function Main(props) {
         </div>
         <button onClick={props.onAddPlace} type='button' className='profile__add-btn'></button>
       </section>
-      <section className='cards'>{cardsData ? cardsData.map(card => <Card cardData={card} />) : null}</section>
+      <section className='cards'>
+        {cardsData
+          ? cardsData.map((card, idx) => {
+              return (
+                <Card
+                  onCardClick={cardData => {
+                    props.onCardClick(cardData)
+                    props.onOverviewPopup()
+                  }}
+                  cardData={card}
+                  key={idx}
+                />
+              )
+            })
+          : null}
+      </section>
     </main>
   )
 }
