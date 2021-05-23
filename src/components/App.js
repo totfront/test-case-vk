@@ -4,7 +4,7 @@ import Header from './Header'
 import Main from './Main'
 import Footer from './Footer'
 import PopupWithForm from './PopupWithForm'
-import PopupWithImage from './PopupWithImage'
+import ImagePopup from './ImagePopup'
 
 const initialPopupState = { isEditAvatarPopupOpen: false, isEditProfilePopupOpen: false, isAddPlacePopupOpen: false, isOverviewPopupOpen: false }
 
@@ -75,7 +75,7 @@ function App() {
         </div>
       </PopupWithForm>
       <PopupWithForm title='Вы уверены?' name='delete-card' />
-      <PopupWithImage card={selectedCard} isOpen={popupState.isOverviewPopupOpen} onClose={closeAllPopups} />
+      <ImagePopup card={selectedCard} isOpen={popupState.isOverviewPopupOpen} onClose={closeAllPopups} />
     </div>
   )
 }

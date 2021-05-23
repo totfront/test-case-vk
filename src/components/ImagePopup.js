@@ -2,7 +2,7 @@ import React from 'react'
 import closeBtnImage from '../images/popup/close-btn.svg'
 import selectors from '../utils/selectors'
 
-function PopupWithForm(props) {
+function ImagePopup(props) {
   const closePopup = () => {
     props.onClose()
   }
@@ -30,4 +30,4 @@ function PopupWithForm(props) {
   )
 }
 
-export default PopupWithForm
+export default ImagePopup
