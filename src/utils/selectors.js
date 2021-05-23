@@ -1,8 +1,7 @@
 export default {
   popup: 'popup',
   openedPopup: 'popup_opened',
-  avatarPopup: 'avatar-upd',
+  avatarPopup: 'popup_type_avatar-updater',
   editProfilePopup: 'popup_type_profile-editor',
-  openedPopup: 'popup_opened',
-  placeAdderPopup: 'card-popup'
+  placeAdderPopup: 'popup_type_card-renderer'
 }

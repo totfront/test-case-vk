@@ -1,19 +1,19 @@
 import React from 'react'
 import editBtnImage from '../images/profile/profile__edit-btn.svg'
 
-function Main({ handleEditAvatarClick, handleEditProfileClick, handleAddPlaceClick }) {
+function Main(props) {
   return (
     <main>
       <section className='profile'>
-        <button onClick={handleEditAvatarClick} className='profile__avatar-btn'></button>
+        <button onClick={props.onEditAvatar} className='profile__avatar-btn'></button>
         <div className='profile__info'>
           <h1 className='profile__name'></h1>
-          <button onClick={handleEditProfileClick} type='button' className='profile__edit-btn'>
+          <button onClick={props.onEditProfile} type='button' className='profile__edit-btn'>
             <img className='profile__edit-pic' src={editBtnImage} alt='Редактировать' />
           </button>
           <p className='profile__description'></p>
         </div>
-        <button onClick={handleAddPlaceClick} type='button' className='profile__add-btn'></button>
+        <button onClick={props.onAddPlace} type='button' className='profile__add-btn'></button>
       </section>
       <section className='cards'>
         <template id='template'>
