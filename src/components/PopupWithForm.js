@@ -3,6 +3,8 @@ import closeBtnImage from '../images/popup/close-btn.svg'
 import selectors from '../utils/selectors'
 
 function PopupWithForm(props) {
+  console.log('props.isOpen============')
+  console.log(props.isOpen)
   const closePopup = () => {
     props.onClose()
   }
@@ -16,12 +18,9 @@ function PopupWithForm(props) {
     closePopup()
     props.onClose()
   }
-  let openedPopupClass = null
-  if (props.isOpen) {
-    openedPopupClass = selectors.openedPopup
-  }
+  const popupClassName = `popup popup_type_${props.name} ${props.isOpen && selectors.openedPopup} appearance`
   return (
-    <div onClick={handleOverlayClick} className={`popup popup_type_${props.name} ${openedPopupClass} appearance`}>
+    <div onClick={handleOverlayClick} className={popupClassName}>
       <div className='popup__container'>
         <h2 className='popup__title'>{props.title}</h2>
         <form className='popup__form' id={props.name} name={props.name} action='#' method='post'>

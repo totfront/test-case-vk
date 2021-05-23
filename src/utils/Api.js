@@ -1,5 +1,5 @@
 // Контроллер запросов
-export class Api {
+class Api {
   constructor(data) {
     this._url = data.url
     this._token = data.token
@@ -114,3 +114,5 @@ export class Api {
     }
   }
 }
+
+export const api = new Api({ token: 'f470df2e-c67b-482b-ae5d-65b776a618c9', url: 'https://mesto.nomoreparties.co/v1/cohort-23' })

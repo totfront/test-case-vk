@@ -7,33 +7,45 @@ import Footer from './Footer'
 import PopupWithForm from './PopupWithForm'
 import PopupWithImage from './PopupWithImage'
 
+const initialPopupState = { isEditAvatarPopupOpen: false, isEditProfilePopupOpen: false, isAddPlacePopupOpen: false }
+
 function App() {
-  // Смена аватара
-  const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false)
-  const handleEditAvatarClick = () => {
-    setEditAvatarPopupOpen(true)
-  }
-  // Изменение данных профиля
-  const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false)
-  const handleEditProfileClick = () => {
-    setEditProfilePopupOpen(true)
-  }
-  // Добавление карточек
-  const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false)
-  const handleAddPlaceClick = () => {
-    setAddPlacePopupOpen(true)
-  }
+  const [popupState, setPopupState] = useState(initialPopupState)
+  // // Смена аватара
+  // const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false)
+  // const handleEditAvatarClick = () => {
+  //   setEditAvatarPopupOpen(true)
+  // }
+  // // Изменение данных профиля
+  // const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false)
+  // const handleEditProfileClick = () => {
+  //   setEditProfilePopupOpen(true)
+  // }
+  // // Добавление карточек
+  // const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false)
+  // const handleAddPlaceClick = () => {
+  //   setAddPlacePopupOpen(true)
+  // }
+
   const closeAllPopups = () => {
-    setAddPlacePopupOpen(false)
-    setEditProfilePopupOpen(false)
-    setEditAvatarPopupOpen(false)
+    setPopupState(initialPopupState)
   }
   return (
     <div>
       <Header />
-      <Main onEditAvatar={handleEditAvatarClick} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} />
+      <Main
+        onEditAvatar={() => {
+          setPopupState({ ...popupState, isEditAvatarPopupOpen: true })
+        }}
+        onEditProfile={() => {
+          setPopupState({ ...popupState, isEditProfilePopupOpen: true })
+        }}
+        onAddPlace={() => {
+          setPopupState({ ...popupState, isAddPlacePopupOpen: true })
+        }}
+      />
       <Footer />
-      <PopupWithForm title='Редактировать профиль' name='profile-editor' isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
+      <PopupWithForm title='Редактировать профиль' name='profile-editor' isOpen={popupState.isEditProfilePopupOpen} onClose={closeAllPopups}>
         <div className='popup__input-wrapper'>
           <input className='popup__input popup__input_data_name' id='profile-name' name='name' placeholder='Имя' type='text' minLength='2' maxLength='40' autoComplete='off' required />
           <span className='popup__input-error' id='profile-name-error'>
@@ -47,7 +59,7 @@ function App() {
           </span>
         </div>
       </PopupWithForm>
-      <PopupWithForm title='Новое место' name='card-renderer' isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}>
+      <PopupWithForm title='Новое место' name='card-renderer' isOpen={popupState.isAddPlacePopupOpen} onClose={closeAllPopups}>
         <div className='popup__input-wrapper'>
           <input className='popup__input popup__input_data_name' placeholder='Название' id='pic-name' name='name' type='text' minLength='2' maxLength='30' autoComplete='off' required />
           <span className='popup__input-error' id='pic-name-error'>
@@ -61,7 +73,7 @@ function App() {
           </span>
         </div>
       </PopupWithForm>
-      <PopupWithForm title='Обновить аватар' name='avatar-updater' isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}>
+      <PopupWithForm title='Обновить аватар' name='avatar-updater' isOpen={popupState.isEditAvatarPopupOpen} onClose={closeAllPopups}>
         <div className='popup__input-wrapper'>
           <input id='avatar-upd-input' className='popup__input popup__input_avatar popup__input_data_description' placeholder='Ссылка на картинку' type='url' name='url' autoComplete='on' required />
           <span id='avatar-upd-input-error' className='popup__input-error popup__input-error_description popup__input-error_avatar'>
