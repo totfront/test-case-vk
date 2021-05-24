@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import editBtnImage from '../images/profile/profile__edit-btn.svg'
-import Api from '../utils/api'
+import Api from '../utils/Api'
 import Card from './Card'
 
 function Main(props) {
