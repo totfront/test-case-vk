@@ -1,22 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import editBtnImage from '../images/profile/profile__edit-btn.svg'
-import { api } from '../utils/api'
+import Api from '../utils/api'
 import Card from './Card'
 
 function Main(props) {
   const [userData, setUserData] = useState(null)
   const [cardsData, setCardsData] = useState([])
   useEffect(() => {
-    api
-      .getUserData()
+    Api.getUserData()
       .then(data => {
         setUserData(data)
       })
       .catch(err => {
         console.log(err + ' && ' + 'Ошибка при получении данных пользователя')
       })
-    api
-      .getCards()
+    Api.getCards()
       .then(cardsData => {
         setCardsData(cardsData)
       })

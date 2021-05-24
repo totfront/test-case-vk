@@ -115,4 +115,4 @@ class Api {
   }
 }
 
-export const api = new Api({ token: 'f470df2e-c67b-482b-ae5d-65b776a618c9', url: 'https://mesto.nomoreparties.co/v1/cohort-23' })
+export default new Api({ token: 'f470df2e-c67b-482b-ae5d-65b776a618c9', url: 'https://mesto.nomoreparties.co/v1/cohort-23' })
