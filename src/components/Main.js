@@ -1,18 +1,28 @@
 import React, { useEffect, useState } from 'react'
 import editBtnImage from '../images/profile/profile__edit-btn.svg'
-import { api } from '../utils/Api'
+import { api } from '../utils/api'
 import Card from './Card'
 
 function Main(props) {
   const [userData, setUserData] = useState(null)
   const [cardsData, setCardsData] = useState([])
   useEffect(() => {
-    const userData = api.getUserData().then(data => {
-      setUserData(data)
-    })
-    const cardsData = api.getCards().then(cardsData => {
-      setCardsData(cardsData)
-    })
+    api
+      .getUserData()
+      .then(data => {
+        setUserData(data)
+      })
+      .catch(err => {
+        console.log(err + ' && ' + 'Ошибка при получении данных пользователя')
+      })
+    api
+      .getCards()
+      .then(cardsData => {
+        setCardsData(cardsData)
+      })
+      .catch(err => {
+        console.log(err + ' && ' + 'Ошибка при получении карточек')
+      })
   }, [])
   return (
     <main>
@@ -46,7 +56,7 @@ function Main(props) {
                     props.onOverviewPopup()
                   }}
                   cardData={card}
-                  key={idx}
+                  key={card._id}
                 />
               )
             })

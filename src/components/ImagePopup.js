@@ -9,12 +9,10 @@ function ImagePopup(props) {
   const handleOverlayClick = e => {
     if (e.target.classList.contains(selectors.openedPopup)) {
       closePopup()
-      props.onClose()
     }
   }
   const handleClosePopupBtnClick = () => {
     closePopup()
-    props.onClose()
   }
   const popupClassName = `popup overview ${props.isOpen && selectors.openedPopup} appearance`
   return (
