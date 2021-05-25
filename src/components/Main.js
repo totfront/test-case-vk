@@ -13,7 +13,7 @@ function Main(props) {
         setUserData(data)
       })
       .catch(err => {
-        console.log(err + ' && ' + 'Ошибка при получении данных пользователя')
+        console.log(err + ' && Ошибка при получении данных пользователя')
       })
     api
       .getCards()
@@ -21,7 +21,7 @@ function Main(props) {
         setCardsData(cardsData)
       })
       .catch(err => {
-        console.log(err + ' && ' + 'Ошибка при получении карточек')
+        console.log(err + ' && Ошибка при получении карточек')
       })
   }, [])
   return (
