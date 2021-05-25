@@ -15,7 +15,6 @@ function PopupWithForm(props) {
     closePopup()
   }
   const popupClassName = `popup popup_type_${props.name} ${props.isOpen && selectors.openedPopup} appearance`
-  const buttonText = 'Сохранить'
   return (
     <div onClick={handleOverlayClick} className={popupClassName}>
       <div className='popup__container'>
@@ -23,7 +22,7 @@ function PopupWithForm(props) {
         <form className='popup__form' id={props.name} name={props.name} action='#' method='post'>
           {props.children}
           <button name='submitBtn' className='popup__save-btn' type='submit'>
-            {buttonText}
+            {props.submitBtnText}
           </button>
         </form>
         <button onClick={handleClosePopupBtnClick} type='button' className='popup__close-btn'>
