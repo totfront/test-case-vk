@@ -2,10 +2,13 @@ import React, { useEffect, useState } from 'react'
 import editBtnImage from '../images/profile/profile__edit-btn.svg'
 import { api } from '../utils/api'
 import Card from './Card'
+import { CurrentUserContext } from '../contexts/CurrentUserContext'
 
 function Main(props) {
   const [userData, setUserData] = useState(null)
   const [cardsData, setCardsData] = useState([])
+  const currentUser = React.useContext(CurrentUserContext)
+
   useEffect(() => {
     api
       .getUserData()
