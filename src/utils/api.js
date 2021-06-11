@@ -69,26 +69,38 @@ class Api {
       })
       .then(response => this._checkResponce(response))
   }
-  // 6. Добавляет новый лайк
-  putLike(cardId) {
-    return fetch(`${this._url}/cards/likes/${cardId}`, {
-      method: 'PUT',
-      headers: {
-        authorization: this._token,
-        'Content-Type': 'application/json'
-      }
-    }).then(response => this._checkResponce(response))
+  // 6. Меняет состояние лайка
+  switchLike(cardId, isLiked) {
+    if (isLiked) {
+      // Уже лайкнут? Удаляет лайк!
+      return fetch(`${this._url}/cards/likes/${cardId}`, {
+        method: 'DELETE',
+        headers: {
+          authorization: this._token,
+          'Content-Type': 'application/json'
+        }
+      }).then(response => this._checkResponce(response))
+    } else {
+      // Ещё нет лайка? Добавит лайк
+      return fetch(`${this._url}/cards/likes/${cardId}`, {
+        method: 'PUT',
+        headers: {
+          authorization: this._token,
+          'Content-Type': 'application/json'
+        }
+      }).then(response => this._checkResponce(response))
+    }
   }
-  // 6. Удаляет лайк
-  deleteLike(cardId) {
-    return fetch(`${this._url}/cards/likes/${cardId}`, {
-      method: 'DELETE',
-      headers: {
-        authorization: this._token,
-        'Content-Type': 'application/json'
-      }
-    }).then(response => this._checkResponce(response))
-  }
+  // // 6. Удаляет лайк
+  // deleteLike(cardId) {
+  //   return fetch(`${this._url}/cards/likes/${cardId}`, {
+  //     method: 'DELETE',
+  //     headers: {
+  //       authorization: this._token,
+  //       'Content-Type': 'application/json'
+  //     }
+  //   }).then(response => this._checkResponce(response))
+  // }
   // 7. Меняет аватар на новый
   changeAvatar(newAvatarUrl) {
     return fetch(`${this._url}/users/me/avatar`, {
