@@ -13,17 +13,19 @@ const initialPopupState = { isEditAvatarPopupOpen: false, isEditProfilePopupOpen
 function App() {
   const [popupState, setPopupState] = useState(initialPopupState)
   const [selectedCard, setSelectedCard] = useState(null)
-  const [currentUser, setCurrentUser] = useState(null)
+  const [userData, setUserData] = useState(null)
+  const [cardsData, setCardsData] = useState([])
   useEffect(() => {
-    api
-      .getUserData()
-      .then(data => {
-        setCurrentUser(data)
+    Promise.all([api.getUserData(), api.getCards()])
+      .then(([userData, cardsData]) => {
+        setUserData(userData)
+        setCardsData(cardsData)
       })
       .catch(err => {
-        console.log(err + ' && Ошибка при получении данных пользователя')
+        console.log(err + ' && Ошибка при получении данных пользователя / Ошибка при получении карточек')
       })
   }, [])
+
   const handleCardClick = cardData => {
     setSelectedCard(cardData)
   }
@@ -31,11 +33,20 @@ function App() {
     setPopupState(initialPopupState)
     setSelectedCard(null)
   }
+  const handleAvatarUpd = avatarData => {
+    console.log('123============')
+    console.log(123)
+    api.updUserData(avatarData)
+  }
   return (
-    <CurrentUserContext.Provider value={currentUser}>
+    <CurrentUserContext.Provider value={userData}>
       <div>
         <Header />
         <Main
+          updCardsData={newCardsData => {
+            setCardsData(newCardsData)
+          }}
+          cardsData={cardsData}
           onEditAvatar={() => {
             setPopupState({ ...popupState, isEditAvatarPopupOpen: true })
           }}
@@ -79,7 +90,7 @@ function App() {
             </span>
           </div>
         </PopupWithForm>
-        <PopupWithForm title='Обновить аватар' name='avatar-updater' isOpen={popupState.isEditAvatarPopupOpen} onClose={closeAllPopups} submitBtnText='Сохранить'>
+        <PopupWithForm title='Обновить аватар' name='avatar-updater' isOpen={popupState.isEditAvatarPopupOpen} onClose={closeAllPopups} submitBtnText='Сохранить' handleSubmit={handleAvatarUpd}>
           <div className='popup__input-wrapper'>
             <input id='avatar-upd-input' className='popup__input popup__input_avatar popup__input_data_description' placeholder='Ссылка на картинку' type='url' name='url' autoComplete='on' required />
             <span id='avatar-upd-input-error' className='popup__input-error popup__input-error_description popup__input-error_avatar'>
