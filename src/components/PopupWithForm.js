@@ -14,7 +14,6 @@ function PopupWithForm(props) {
   const handleClosePopupBtnClick = () => {
     closePopup()
   }
-  function getInputsValues() {}
   const popupClassName = `popup popup_type_${props.name} ${props.isOpen && selectors.openedPopup} appearance`
   return (
     <div onClick={handleOverlayClick} className={popupClassName}>
@@ -22,15 +21,7 @@ function PopupWithForm(props) {
         <h2 className='popup__title'>{props.title}</h2>
         <form className='popup__form' id={props.name} name={props.name} action='#' method='post'>
           {props.children}
-          <button
-            onClick={e => {
-              e.preventDefault()
-              getInputsValues()
-              // props.handleSubmit(1)
-            }}
-            name='submitBtn'
-            className='popup__save-btn'
-            type='submit'>
+          <button onClick={props.onSubmit} name='submitBtn' className='popup__save-btn' type='submit'>
             {props.submitBtnText}
           </button>
         </form>
@@ -41,5 +32,4 @@ function PopupWithForm(props) {
     </div>
   )
 }
-
 export default PopupWithForm
