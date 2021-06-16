@@ -18,6 +18,11 @@ function Main(props) {
       props.updCardsData(newCards)
     })
   }
+  function handleCardDelete(card) {
+    api.removeCard(card._id).then(() => {
+      api.getCards().then(props.updCardsData)
+    })
+  }
   return (
     <main>
       <section className='profile'>
@@ -51,6 +56,9 @@ function Main(props) {
                   }}
                   onCardLike={() => {
                     handleCardLike(cardsData[idx])
+                  }}
+                  onCardDelete={() => {
+                    handleCardDelete(cardsData[idx])
                   }}
                   cardData={card}
                   key={card._id}
