@@ -92,7 +92,7 @@ class Api {
     }
   }
   // Меняет аватар на новый
-  changeAvatar(newAvatarUrl) {
+  updAvatar(newAvatarUrl) {
     return fetch(`${this._url}/users/me/avatar`, {
       method: 'PATCH',
       body: JSON.stringify({

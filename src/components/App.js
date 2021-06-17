@@ -8,6 +8,7 @@ import ImagePopup from './ImagePopup'
 import { api } from '../utils/api'
 import { CurrentUserContext } from '../contexts/CurrentUserContext'
 import EditProfilePopup from './EditProfilePopup'
+import EditAvatarPopup from './EditAvatarPopup'
 
 const initialPopupState = { isEditAvatarPopupOpen: false, isEditProfilePopupOpen: false, isAddPlacePopupOpen: false, isOverviewPopupOpen: false }
 
@@ -80,6 +81,7 @@ function App() {
           </div>
         </PopupWithForm>
         <PopupWithForm title='Вы уверены?' name='delete-card' />
+        <EditAvatarPopup onUpdateAvatar={newUserData => handleUpdateUser(newUserData)} isOpen={popupState.isEditAvatarPopupOpen} onClose={closeAllPopups} />
         <EditProfilePopup
           onUpdateUser={newUserData => {
             handleUpdateUser(newUserData)

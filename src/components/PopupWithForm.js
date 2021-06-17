@@ -3,16 +3,10 @@ import closeBtnImage from '../images/popup/close-btn.svg'
 import selectors from '../utils/selectors'
 
 function PopupWithForm(props) {
-  const closePopup = () => {
-    props.onClose()
-  }
   const handleOverlayClick = e => {
     if (e.target.classList.contains(selectors.openedPopup)) {
-      closePopup()
+      props.onClose()
     }
-  }
-  const handleClosePopupBtnClick = () => {
-    closePopup()
   }
   const popupClassName = `popup popup_type_${props.name} ${props.isOpen && selectors.openedPopup} appearance`
   return (
@@ -25,7 +19,7 @@ function PopupWithForm(props) {
             {props.submitBtnText}
           </button>
         </form>
-        <button onClick={handleClosePopupBtnClick} type='button' className='popup__close-btn'>
+        <button onClick={props.onClose} type='button' className='popup__close-btn'>
           <img className='popup__close-pic' src={closeBtnImage} alt='Кнопка закрыть' />
         </button>
       </div>
