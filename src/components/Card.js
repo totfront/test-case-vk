@@ -3,11 +3,7 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext'
 
 export default function Card(props) {
   const currentUser = React.useContext(CurrentUserContext)
-
-  // Определяет, являемся ли мы владельцем текущей карточки
   const isOwn = props.cardData.owner._id === currentUser._id
-
-  // Определяет, лайкал ли текущий пользователь карточку
   const isLiked = props.cardData.likes.some(like => like._id === currentUser._id)
 
   function handleCardClick() {

@@ -9,6 +9,7 @@ import { api } from '../utils/api'
 import { CurrentUserContext } from '../contexts/CurrentUserContext'
 import EditProfilePopup from './EditProfilePopup'
 import EditAvatarPopup from './EditAvatarPopup'
+import AddPlacePopup from './AddPlacePopup'
 
 const initialPopupState = { isEditAvatarPopupOpen: false, isEditProfilePopupOpen: false, isAddPlacePopupOpen: false, isOverviewPopupOpen: false }
 
@@ -17,6 +18,8 @@ function App() {
   const [selectedCard, setSelectedCard] = useState(null)
   const [userData, setUserData] = useState(null)
   const [cardsData, setCardsData] = useState([])
+  const currentUser = React.useContext(CurrentUserContext)
+
   useEffect(() => {
     Promise.all([api.getUserData(), api.getCards()])
       .then(([userData, cardsData]) => {
@@ -28,6 +31,28 @@ function App() {
       })
   }, [])
 
+  function handleCardLike(card) {
+    const isLiked = card.likes.some(i => i._id === userData._id)
+    api.switchLike(card._id, isLiked).then(newCard => {
+      const newCards = cardsData.map(c => (c._id === card._id ? newCard : c))
+      setCardsData(newCards)
+    })
+  }
+  function handleCardDelete(card) {
+    api
+      .removeCard(card._id)
+      .then(() => {
+        api
+          .getCards()
+          .then(setCardsData)
+          .catch(err => {
+            console.log(err + ' && Ошибка при получении новых карточек')
+          })
+      })
+      .catch(err => {
+        console.log(err + ' && Ошибка при удалении карточки')
+      })
+  }
   const handleCardClick = cardData => {
     setSelectedCard(cardData)
   }
@@ -39,9 +64,22 @@ function App() {
     setUserData(newUserData)
     closeAllPopups()
   }
-  // const handleAvatarUpd = avatarData => {
-  //   api.updUserData(avatarData)
-  // }
+  const handleAddPlaceSubmit = newPlace => {
+    api
+      .addCard(newPlace)
+      .then(() => {
+        api
+          .getCards()
+          .then(setCardsData)
+          .then(closeAllPopups)
+          .catch(err => {
+            console.log(err + ' && Ошибка при получении новых карточек')
+          })
+      })
+      .catch(err => {
+        console.log(err + ' && Ошибка при добавления нового места')
+      })
+  }
   return (
     <CurrentUserContext.Provider value={userData}>
       <div>
@@ -50,6 +88,8 @@ function App() {
           updCardsData={newCardsData => {
             setCardsData(newCardsData)
           }}
+          handleCardLike={card => handleCardLike(card)}
+          handleCardDelete={card => handleCardDelete(card)}
           cardsData={cardsData}
           onEditAvatar={() => {
             setPopupState({ ...popupState, isEditAvatarPopupOpen: true })
@@ -66,20 +106,6 @@ function App() {
           onCardClick={handleCardClick}
         />
         <Footer />
-        <PopupWithForm title='Новое место' name='card-renderer' isOpen={popupState.isAddPlacePopupOpen} onClose={closeAllPopups} submitBtnText='Сохранить'>
-          <div className='popup__input-wrapper'>
-            <input className='popup__input popup__input_data_name' placeholder='Название' id='pic-name' name='name' type='text' minLength='2' maxLength='30' autoComplete='off' required />
-            <span className='popup__input-error' id='pic-name-error'>
-              Вы пропустили это поле.
-            </span>
-          </div>
-          <div className='popup__input-wrapper'>
-            <input className='popup__input popup__input_data_description' placeholder='Ссылка на картинку' id='url' type='url' name='url' autoComplete='on' required />
-            <span className='popup__input-error popup__input-error_description' id='url-error'>
-              Введите адрес сайта.
-            </span>
-          </div>
-        </PopupWithForm>
         <PopupWithForm title='Вы уверены?' name='delete-card' />
         <EditAvatarPopup onUpdateAvatar={newUserData => handleUpdateUser(newUserData)} isOpen={popupState.isEditAvatarPopupOpen} onClose={closeAllPopups} />
         <EditProfilePopup
@@ -89,6 +115,7 @@ function App() {
           isOpen={popupState.isEditProfilePopupOpen}
           onClose={closeAllPopups}
         />
+        <AddPlacePopup isOpen={popupState.isAddPlacePopupOpen} onClose={closeAllPopups} handleAddPlaceSubmit={newPlace => handleAddPlaceSubmit(newPlace)} />
         <ImagePopup card={selectedCard} isOpen={popupState.isOverviewPopupOpen} onClose={closeAllPopups} />
       </div>
     </CurrentUserContext.Provider>

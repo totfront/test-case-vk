@@ -7,21 +7,22 @@ function EditAvatarPopup(props) {
     setUrl(e.target.value)
   }
   function submitHandler(newUrl) {
-    api.updAvatar(newUrl).then(() => {
-      api.getUserData().then(res => {
-        props.onUpdateAvatar(res)
+    api
+      .updAvatar(newUrl)
+      .then(() => {
+        api
+          .getUserData()
+          .then(res => {
+            props.onUpdateAvatar(res)
+          })
+          .catch(err => {
+            console.log(err + ' && Ошибка при получении данных пользователя')
+          })
+        props.onClose()
       })
-      props.onClose()
-    })
-
-    // api.updUserData({ name: userName, description: userDescription }).then(res => {
-    //   api.getUserData().then(res => {
-    //     props.onUpdateUser(res)
-    //     props.onClose()
-    //   })
-    // })
-    // setName(userName)
-    // setDescription(userDescription)
+      .catch(err => {
+        console.log(err + ' && Ошибка при обновлении аватара')
+      })
   }
   return (
     <PopupWithForm
