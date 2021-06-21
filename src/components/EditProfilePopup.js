@@ -1,7 +1,6 @@
 import React from 'react'
 import PopupWithForm from './PopupWithForm'
 import { CurrentUserContext } from '../contexts/CurrentUserContext'
-import { api } from '../utils/api'
 function EditProfilePopup(props) {
   const submitBtnText = 'Сохранить'
   const [name, setName] = React.useState('')
@@ -24,7 +23,6 @@ function EditProfilePopup(props) {
     setName(userName)
     setDescription(userDescription)
   }
-  // const popupClassName = `popup popup_type_${props.name} ${props.isOpen && selectors.openedPopup} appearance`
   return (
     <PopupWithForm
       onSubmit={e => {

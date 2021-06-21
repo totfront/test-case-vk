@@ -1,5 +1,4 @@
 import React from 'react'
-import { api } from '../utils/api'
 import PopupWithForm from './PopupWithForm'
 function EditAvatarPopup(props) {
   const [url, setUrl] = React.useState('')
@@ -18,7 +17,7 @@ function EditAvatarPopup(props) {
       onClose={props.onClose}
       submitBtnText='Сохранить'>
       <div className='popup__input-wrapper'>
-        <input id='avatar-upd-input' onChange={handleChange} className='popup__input popup__input_avatar popup__input_data_description' placeholder='Ссылка на картинку' type='url' name='url' autoComplete='on' required />
+        <input id='avatar-upd-input' onChange={handleChange} value={url} className='popup__input popup__input_avatar popup__input_data_description' placeholder='Ссылка на картинку' type='url' name='url' autoComplete='on' required />
         <span id='avatar-upd-input-error' className='popup__input-error popup__input-error_description popup__input-error_avatar'>
           Введите адрес картинки.
         </span>

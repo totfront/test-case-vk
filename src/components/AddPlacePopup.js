@@ -2,8 +2,8 @@ import React from 'react'
 import PopupWithForm from './PopupWithForm'
 
 function AddPlacePopup(props) {
-  const [placeName, setPlacename] = React.useState()
-  const [placeUrl, setPlaceUrl] = React.useState()
+  const [placeName, setPlacename] = React.useState('')
+  const [placeUrl, setPlaceUrl] = React.useState('')
   function handleNameChange(e) {
     setPlacename(e.target.value)
   }
@@ -22,13 +22,13 @@ function AddPlacePopup(props) {
       onClose={props.onClose}
       submitBtnText='Сохранить'>
       <div className='popup__input-wrapper'>
-        <input className='popup__input popup__input_data_name' onChange={handleNameChange} placeholder='Название' id='pic-name' name='name' type='text' minLength='2' maxLength='30' autoComplete='off' required />
+        <input className='popup__input popup__input_data_name' onChange={handleNameChange} value={placeName} placeholder='Название' id='pic-name' name='name' type='text' minLength='2' maxLength='30' autoComplete='off' required />
         <span className='popup__input-error' id='pic-name-error'>
           Вы пропустили это поле.
         </span>
       </div>
       <div className='popup__input-wrapper'>
-        <input className='popup__input popup__input_data_description' onChange={handleUrlChange} placeholder='Ссылка на картинку' id='url' type='url' name='url' autoComplete='on' required />
+        <input className='popup__input popup__input_data_description' onChange={handleUrlChange} value={placeUrl} placeholder='Ссылка на картинку' id='url' type='url' name='url' autoComplete='on' required />
         <span className='popup__input-error popup__input-error_description' id='url-error'>
           Введите адрес сайта.
         </span>
