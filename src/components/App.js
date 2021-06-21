@@ -71,6 +71,17 @@ function App() {
         console.log(err + ' && Ошибка при изменении данных пользователя')
       })
   }
+  const handleUpdateAvatar = avatarUrl => {
+    api
+      .updAvatar(avatarUrl)
+      .then(newUserData => {
+        setUserData(newUserData)
+        closeAllPopups()
+      })
+      .catch(err => {
+        console.log(err + ' && Ошибка при изменении аватара пользователя')
+      })
+  }
   const handleAddPlaceSubmit = newPlace => {
     api
       .addCard(newPlace)
@@ -114,7 +125,7 @@ function App() {
         />
         <Footer />
         {/* <PopupWithForm title='Вы уверены?' name='delete-card' /> */}
-        <EditAvatarPopup onUpdateAvatar={newUserData => handleUpdateUser(newUserData)} isOpen={popupState.isEditAvatarPopupOpen} onClose={closeAllPopups} />
+        <EditAvatarPopup onUpdateAvatar={avatarUrl => handleUpdateAvatar(avatarUrl)} isOpen={popupState.isEditAvatarPopupOpen} onClose={closeAllPopups} />
         <EditProfilePopup
           onUpdateUser={newUserData => {
             handleUpdateUser(newUserData)

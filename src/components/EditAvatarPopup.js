@@ -6,29 +6,11 @@ function EditAvatarPopup(props) {
   function handleChange(e) {
     setUrl(e.target.value)
   }
-  function submitHandler(newUrl) {
-    api
-      .updAvatar(newUrl)
-      .then(() => {
-        api
-          .getUserData()
-          .then(res => {
-            props.onUpdateAvatar(res)
-          })
-          .catch(err => {
-            console.log(err + ' && Ошибка при получении данных пользователя')
-          })
-        props.onClose()
-      })
-      .catch(err => {
-        console.log(err + ' && Ошибка при обновлении аватара')
-      })
-  }
   return (
     <PopupWithForm
       onSubmit={e => {
         e.preventDefault()
-        submitHandler(url)
+        props.onUpdateAvatar(url)
       }}
       title='Обновить аватар'
       name='avatar-updater'
