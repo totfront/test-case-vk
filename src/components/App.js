@@ -87,14 +87,9 @@ function App() {
   const handleAddPlaceSubmit = newPlace => {
     api
       .addCard(newPlace)
-      .then(() => {
-        api
-          .getCards()
-          .then(setCardsData)
-          .then(closeAllPopups)
-          .catch(err => {
-            console.log(err + ' && Ошибка при получении новых карточек')
-          })
+      .then(newCardData => {
+        setCardsData([newCardData, ...cardsData])
+        closeAllPopups()
       })
       .catch(err => {
         console.log(err + ' && Ошибка при добавления нового места')
