@@ -57,7 +57,7 @@ class Api {
       method: 'PATCH',
       body: JSON.stringify({
         name: profileData.name,
-        about: profileData.description
+        about: profileData.about
       }),
       headers: {
         authorization: this._token,

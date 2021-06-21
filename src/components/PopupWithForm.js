@@ -13,9 +13,9 @@ function PopupWithForm(props) {
     <div onClick={handleOverlayClick} className={popupClassName}>
       <div className='popup__container'>
         <h2 className='popup__title'>{props.title}</h2>
-        <form className='popup__form' id={props.name} name={props.name} action='#' method='post'>
+        <form onSubmit={props.onSubmit} className='popup__form' id={props.name} name={props.name} action='#' method='post'>
           {props.children}
-          <button onClick={props.onSubmit} name='submitBtn' className='popup__save-btn' type='submit'>
+          <button name='submitBtn' className='popup__save-btn' type='submit'>
             {props.submitBtnText}
           </button>
         </form>

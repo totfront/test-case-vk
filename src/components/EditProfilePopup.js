@@ -3,7 +3,7 @@ import PopupWithForm from './PopupWithForm'
 import { CurrentUserContext } from '../contexts/CurrentUserContext'
 import { api } from '../utils/api'
 function EditProfilePopup(props) {
-  let submitBtnText = 'Сохранить'
+  const submitBtnText = 'Сохранить'
   const [name, setName] = React.useState('')
   const [description, setDescription] = React.useState('')
   const currentUser = React.useContext(CurrentUserContext)
@@ -20,22 +20,7 @@ function EditProfilePopup(props) {
     setDescription(e.target.value)
   }
   function submitHandler(userName, userDescription) {
-    api
-      .updUserData({ name: userName, description: userDescription })
-      .then(res => {
-        api
-          .getUserData()
-          .then(res => {
-            props.onUpdateUser(res)
-            props.onClose()
-          })
-          .catch(err => {
-            console.log(err + ' && Ошибка при получении данных пользователя')
-          })
-      })
-      .catch(err => {
-        console.log(err + ' && Ошибка при изменении данных пользователя')
-      })
+    props.onUpdateUser({ userName, userDescription })
     setName(userName)
     setDescription(userDescription)
   }

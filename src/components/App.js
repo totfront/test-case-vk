@@ -61,8 +61,15 @@ function App() {
     setSelectedCard(null)
   }
   const handleUpdateUser = newUserData => {
-    setUserData(newUserData)
-    closeAllPopups()
+    api
+      .updUserData({ name: newUserData.userName, about: newUserData.userDescription })
+      .then(newUserData => {
+        setUserData(newUserData)
+        closeAllPopups()
+      })
+      .catch(err => {
+        console.log(err + ' && Ошибка при изменении данных пользователя')
+      })
   }
   const handleAddPlaceSubmit = newPlace => {
     api
@@ -106,7 +113,7 @@ function App() {
           onCardClick={handleCardClick}
         />
         <Footer />
-        <PopupWithForm title='Вы уверены?' name='delete-card' />
+        {/* <PopupWithForm title='Вы уверены?' name='delete-card' /> */}
         <EditAvatarPopup onUpdateAvatar={newUserData => handleUpdateUser(newUserData)} isOpen={popupState.isEditAvatarPopupOpen} onClose={closeAllPopups} />
         <EditProfilePopup
           onUpdateUser={newUserData => {
