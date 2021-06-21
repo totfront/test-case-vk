@@ -37,10 +37,10 @@ function Main(props) {
                     props.onOverviewPopup()
                   }}
                   onCardLike={() => {
-                    props.handleCardLike(props.cardsData[idx])
+                    props.handleCardLike(card)
                   }}
                   onCardDelete={() => {
-                    props.handleCardDelete(props.cardsData[idx])
+                    props.handleCardDelete(card)
                   }}
                   cardData={card}
                   key={card._id}
