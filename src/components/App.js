@@ -32,21 +32,24 @@ function App() {
 
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === userData._id)
-    api.switchLike(card._id, isLiked).then(newCard => {
-      const newCards = cardsData.map(c => (c._id === card._id ? newCard : c))
-      setCardsData(newCards)
-    })
+    api
+      .switchLike(card._id, isLiked)
+      .then(newCard => {
+        const newCards = cardsData.map(c => (c._id === card._id ? newCard : c))
+        setCardsData(newCards)
+      })
+      .catch(err => {
+        console.log(err + ' && Ошибка при изменении лайка')
+      })
   }
   function handleCardDelete(card) {
     api
       .removeCard(card._id)
       .then(() => {
-        api
-          .getCards()
-          .then(setCardsData)
-          .catch(err => {
-            console.log(err + ' && Ошибка при получении новых карточек')
-          })
+        const getDeletedCard = item => {
+          return item._id !== card._id
+        }
+        setCardsData(cardsData.filter(getDeletedCard))
       })
       .catch(err => {
         console.log(err + ' && Ошибка при удалении карточки')
