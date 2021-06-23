@@ -1,4 +1,4 @@
-.input-field__btn-emoji {
+.btn {
   display: flex;
   align-content: center;
   align-self: flex-start;
@@ -9,7 +9,7 @@
   background-color: transparent;
 }
 
-.input-field__btn-emoji:hover {
+.btn:hover {
   cursor: pointer;
 
   opacity: .5;

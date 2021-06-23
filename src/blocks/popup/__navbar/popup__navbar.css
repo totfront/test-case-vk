@@ -1,0 +1,5 @@
+.popup__navbar {
+  display: flex;
+
+  background-color: var(--light-grey);
+}

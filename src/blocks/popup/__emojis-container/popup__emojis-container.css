@@ -1,0 +1,7 @@
+.popup__emojis-container {
+  overflow: auto;
+
+  max-height: 285px;
+  margin: 7px 0;
+  padding: 0 10px;
+}
