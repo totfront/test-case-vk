@@ -12,16 +12,29 @@ function EmojiPopup(props) {
     setTotalEmojisPopupVisibility(false)
     setRecentEmojiPopupVisibility(true)
   }
-
+  const maxRecentEmojiCounter = 25
   const handleEmojiClick = emoji => {
-    if (!recentEmojis.some(i => i == emoji)) {
-      setRecentEmojis([emoji, ...recentEmojis])
+    let emojiDuplicateIdx
+    // Check is some of recent emojis already has last clicked emoji
+    if (
+      recentEmojis.some((i, idx) => {
+        if (i === emoji) {
+          emojiDuplicateIdx = idx
+        }
+        return i === emoji
+      })
+    ) {
+      setRecentEmojis(recentEmojis.splice(emojiDuplicateIdx, 1))
     }
-
+    setRecentEmojis([emoji, ...recentEmojis])
+    // Check for max count, if so delete the oldest emoji
+    if (recentEmojis.length > maxRecentEmojiCounter) {
+      recentEmojis.splice(maxRecentEmojiCounter - 1, 0)
+      setRecentEmojis(recentEmojis)
+    }
     props.setEmoji(emoji)
     props.onEmoji(emoji)
   }
-
   return (
     <article className='popup'>
       {totalEmojisPopupVisibility && (
