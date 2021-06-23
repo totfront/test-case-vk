@@ -5,5 +5,15 @@
 @import url(./blocks/page/page.css);
 /* input-field */
 @import url(./blocks/input-field/input-field.css);
-@import url(./blocks/input-field/__input/input-field__text-area.css);
-@import url(./blocks/input-field/__btn-emoji/input-field__btn-emoji.css);
+@import url(./blocks/input-field/__text-area/input-field__text-area.css);
+@import url(./blocks/input-field/__input-area/input-field__input-area.css);
+/* popup */
+@import url(./blocks/popup/popup.css);
+@import url(./blocks/popup/__emojis-heading/popup__emojis-heading.css);
+@import url(./blocks/popup/__emojis/popup__emojis.css);
+@import url(./blocks/popup/__emoji/popup__emoji.css);
+@import url(./blocks/popup/__emojis-container/popup__emojis-container.css);
+/* navbar */
+@import url(./blocks/popup/__navbar/popup__navbar.css);
+@import url(./blocks/popup/__navbar-btn/popup__navbar-btn.css);
+@import url(./blocks/popup/__navbar-btn/_active/popup__navbar-btn_active.css);
