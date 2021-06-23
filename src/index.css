@@ -3,6 +3,8 @@
 @import url(./colors/colors.css);
 /* page */
 @import url(./blocks/page/page.css);
+/* button */
+@import url(./blocks/btn/btn.css);
 /* input-field */
 @import url(./blocks/input-field/input-field.css);
 @import url(./blocks/input-field/__text-area/input-field__text-area.css);

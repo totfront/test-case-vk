@@ -1,4 +1,6 @@
 .input-field {
+  position: relative;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -9,7 +11,7 @@
   margin: auto;
   padding: 9px;
 
-  border: 1px solid var(--light-grey);
+  border: 1px solid var(--grey);
   border-radius: 4px;
   background-color: white;
 
