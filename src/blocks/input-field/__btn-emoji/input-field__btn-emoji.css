@@ -1,0 +1,16 @@
+.input-field__btn-emoji {
+  display: flex;
+  align-content: center;
+  align-self: flex-start;
+
+  padding: 0;
+
+  border: none;
+  background-color: transparent;
+}
+
+.input-field__btn-emoji:hover {
+  cursor: pointer;
+
+  opacity: .5;
+}

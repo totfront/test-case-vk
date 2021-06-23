@@ -4,5 +4,6 @@
 /* page */
 @import url(./blocks/page/page.css);
 /* input-field */
-@import url(./blocks/input-field/__image/input-field__image.css);
 @import url(./blocks/input-field/input-field.css);
+@import url(./blocks/input-field/__input/input-field__text-area.css);
+@import url(./blocks/input-field/__btn-emoji/input-field__btn-emoji.css);

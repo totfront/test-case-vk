@@ -1,24 +1,26 @@
 import React, { useState, useEffect } from 'react'
 import '../index.css'
+import EmojiPopup from './EmojiPopup'
 
 function App() {
-  const [inputValue, setInputValue] = React.useState('')
-
-  const getInputValue = e => {
-    setInputValue(e.target.value)
-    return e.target.value
+  const showEmojiPopup = e => {
+    e.preventDefault()
+    console.log('123============')
+    console.log(123)
   }
+
   return (
     <div>
-      <form className='input-field'>
-        <input className='input-field__input' placeholder='Ваше сообщение' value={inputValue} onChange={getInputValue} />
-        <svg className='input-field__image' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'>
-          <path fill='#c5d0db' d='M8.4 14.3C8.8 14 9.4 14 9.7 14.4 9.7 14.4 9.7 14.4 9.7 14.4 9.7 14.5 9.8 14.5 9.8 14.5 9.9 14.6 10 14.7 10.2 14.9 10.6 15.1 11.2 15.4 12 15.4 12.8 15.4 13.4 15.1 13.8 14.9 14 14.7 14.1 14.6 14.2 14.5 14.2 14.5 14.3 14.5 14.3 14.4L14.3 14.4 14.3 14.4C14.6 14 15.2 14 15.6 14.3 16 14.6 16 15.2 15.7 15.6L15 15C15.7 15.6 15.7 15.6 15.7 15.6L15.7 15.6 15.7 15.6 15.7 15.6 15.7 15.6 15.7 15.6C15.7 15.6 15.6 15.6 15.6 15.7 15.6 15.7 15.5 15.8 15.4 15.9 15.3 16 15 16.2 14.7 16.4 14.1 16.8 13.2 17.2 12 17.2 10.8 17.2 9.9 16.8 9.3 16.4 9 16.2 8.7 16 8.6 15.9 8.5 15.8 8.4 15.7 8.4 15.7 8.4 15.6 8.3 15.6 8.3 15.6L8.3 15.6 8.3 15.6 8.3 15.6 8.3 15.6C8.3 15.6 8.3 15.6 9 15L8.3 15.6C8 15.2 8 14.6 8.4 14.3Z' className='input-field__image-part' />
-          <path fill='#c5d0db' d='M10.3 10.3C10.3 10.9 9.7 11.5 9 11.5 8.3 11.5 7.8 10.9 7.8 10.3 7.8 9.6 8.3 9 9 9 9.7 9 10.3 9.6 10.3 10.3Z' className='input-field__image-part' />
-          <path fill='#c5d0db' d='M15 11.5C15.7 11.5 16.3 10.9 16.3 10.3 16.3 9.6 15.7 9 15 9 14.3 9 13.8 9.6 13.8 10.3 13.8 10.9 14.3 11.5 15 11.5Z' className='input-field__image-part' />
-          <path fill='#c5d0db' d='M12 2.1C6.5 2.1 2.1 6.5 2.1 12 2.1 17.5 6.5 21.9 12 21.9 17.5 21.9 21.9 17.5 21.9 12 21.9 6.5 17.5 2.1 12 2.1ZM3.9 12C3.9 7.5 7.5 3.9 12 3.9 16.5 3.9 20.1 7.5 20.1 12 20.1 16.5 16.5 20.1 12 20.1 7.5 20.1 3.9 16.5 3.9 12Z' className='input-field__image-part' />
-        </svg>
-      </form>
+      <EmojiPopup />
+      <section className='input-field'>
+        <div className='input-field__text-area' role='textbox' contentEditable></div>
+        <button className='input-field__btn-emoji' onClick={showEmojiPopup}>
+          <svg className='input-field__emoji-image' xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none'>
+            <path d='M6.438 12.297a.9.9 0 011.273.15 2.772 2.772 0 00.516.415c.383.24.97.488 1.773.488.803 0 1.39-.249 1.773-.488a2.773 2.773 0 00.516-.416l.012-.013.002-.003a.9.9 0 011.4 1.132L13 13l.703.562-.001.002-.002.001-.002.004-.007.008-.018.021a3.516 3.516 0 01-.245.254c-.16.15-.394.345-.701.536A5.094 5.094 0 0110 15.15a5.094 5.094 0 01-2.727-.762 4.567 4.567 0 01-.701-.536 3.498 3.498 0 01-.245-.254l-.018-.021-.007-.008-.002-.004-.002-.001s0-.002.702-.564l-.703.562a.9.9 0 01.14-1.265zM8.25 8.25a1.25 1.25 0 11-2.5 0 1.25 1.25 0 012.5 0zM13 9.5A1.25 1.25 0 1013 7a1.25 1.25 0 000 2.5z' fill='#C5D0DB' />
+            <path d='M10 .1C4.532.1.1 4.532.1 10s4.432 9.9 9.9 9.9 9.9-4.432 9.9-9.9S15.468.1 10 .1zM1.9 10a8.1 8.1 0 1116.2 0 8.1 8.1 0 01-16.2 0z' fill='#C5D0DB' />
+          </svg>
+        </button>
+      </section>
     </div>
   )
 }

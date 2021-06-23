@@ -1,5 +1,6 @@
 .input-field {
   display: flex;
+  align-items: center;
   justify-content: space-between;
 
   box-sizing: border-box;
@@ -11,4 +12,8 @@
   border: 1px solid var(--light-grey);
   border-radius: 4px;
   background-color: white;
+
+  font-family: 'SFPro-regular', ‘Arial’, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
 }
