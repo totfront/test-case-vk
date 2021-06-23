@@ -1,0 +1,14 @@
+.input-field {
+  display: flex;
+  justify-content: space-between;
+
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 290px;
+  margin: auto;
+  padding: 9px;
+
+  border: 1px solid var(--light-grey);
+  border-radius: 4px;
+  background-color: white;
+}
