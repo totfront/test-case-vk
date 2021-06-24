@@ -1,5 +1,5 @@
-import React from 'react'
 import '../index.css'
+import React from 'react'
 import EmojiPopup from './EmojiPopup/EmojiPopup'
 
 function App() {
@@ -17,7 +17,9 @@ function App() {
   const setTextareaContent = e => {
     setCurrentText(e.target.value)
   }
+  const deafultTextareaHeight = '18px'
   const setTextAreaHeight = e => {
+    e.target.style.height = deafultTextareaHeight
     const scrollHeight = e.target.scrollHeight
     e.target.style.height = scrollHeight + 'px'
   }
@@ -48,8 +50,10 @@ function App() {
           onClick={e => {
             setSelectionPosition(e.target.selectionStart)
           }}
-          onChange={e => {
+          onKeyUp={e => {
             setTextAreaHeight(e)
+          }}
+          onChange={e => {
             setTextareaContent(e)
           }}
         />
