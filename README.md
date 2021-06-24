@@ -4,7 +4,6 @@
 
 ## Установка
 
-
 ```bash
 yarn insatall && yarn start
 ```
