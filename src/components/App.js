@@ -18,10 +18,10 @@ function App() {
     setCurrentText(e.target.value)
   }
   const deafultTextareaHeight = '18px'
-  const setTextAreaHeight = e => {
-    e.target.style.height = deafultTextareaHeight
-    const scrollHeight = e.target.scrollHeight
-    e.target.style.height = scrollHeight + 'px'
+  const setTextAreaHeight = el => {
+    el.style.height = deafultTextareaHeight
+    const scrollHeight = el.scrollHeight
+    el.style.height = scrollHeight + 'px'
   }
   return (
     <div className='input-field__wrapper'>
@@ -37,6 +37,7 @@ function App() {
               setRecentEmojis(emojis)
             }}
             onEmoji={emoji => {
+              setTextAreaHeight(textAreaEl)
               setCurrentEmoji(emoji)
               setCurrentText(currentText.slice(0, selectionPosition) + currentEmoji + currentText.slice(selectionPosition)) // всталявляет эмодзи в текущее место каретки
             }}
@@ -51,9 +52,10 @@ function App() {
             setSelectionPosition(e.target.selectionStart)
           }}
           onKeyUp={e => {
-            setTextAreaHeight(e)
+            setTextAreaHeight(e.target)
           }}
           onChange={e => {
+            setTextAreaEl(e.target)
             setTextareaContent(e)
           }}
         />
