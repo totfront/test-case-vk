@@ -4,12 +4,11 @@ import EmojiPopup from './EmojiPopup/EmojiPopup'
 
 function App() {
   const [emojiPopupState, setEmojiPopupState] = React.useState(false)
-  const [currentEmoji, setCurrentEmoji] = React.useState('')
+  const [currentEmoji, setCurrentEmoji] = React.useState('😐')
   const [currentText, setCurrentText] = React.useState('')
   const [recentEmojis, setRecentEmojis] = React.useState([])
-  const [textAreaEl, setTextAreaEl] = React.useState()
-  const [selectionPosition, setSelectionPosition] = React.useState(null)
-
+  const [textAreaEl, setTextAreaEl] = React.useState(null)
+  const [selectionPosition, setSelectionPosition] = React.useState()
   const showEmojiPopup = e => {
     e.preventDefault()
     setEmojiPopupState(!emojiPopupState)
@@ -23,6 +22,9 @@ function App() {
     const scrollHeight = el.scrollHeight
     el.style.height = scrollHeight + 'px'
   }
+  React.useEffect(() => {
+    setTextAreaEl(document.querySelector('.input-field__text-area'))
+  }, [])
   return (
     <div className='input-field__wrapper'>
       <section className='input-field'>
@@ -38,6 +40,7 @@ function App() {
             }}
             onEmoji={emoji => {
               setTextAreaHeight(textAreaEl)
+              setEmojiPopupState(false)
               setCurrentEmoji(emoji)
               setCurrentText(currentText.slice(0, selectionPosition) + currentEmoji + currentText.slice(selectionPosition)) // всталявляет эмодзи в текущее место каретки
             }}
@@ -50,11 +53,15 @@ function App() {
           placeholder='Ваше сообщение'
           onClick={e => {
             setSelectionPosition(e.target.selectionStart)
+            setEmojiPopupState(false)
           }}
           onKeyUp={e => {
             setTextAreaHeight(e.target)
           }}
           onChange={e => {
+            setSelectionPosition(e.target.selectionStart)
+            setEmojiPopupState(false)
+            setTextAreaHeight(e.target)
             setTextAreaEl(e.target)
             setTextareaContent(e)
           }}
