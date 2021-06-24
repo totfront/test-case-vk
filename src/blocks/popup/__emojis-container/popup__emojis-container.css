@@ -1,0 +1,17 @@
+.popup__emojis-container {
+  overflow: auto;
+
+  max-height: 285px;
+  margin: 7px 5px 7px 10px;
+}
+
+.popup__emojis-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.popup__emojis-container::-webkit-scrollbar-thumb {
+  height: 30%;
+
+  border-radius: 3px;
+  background-color: var(--medium-grey);
+}

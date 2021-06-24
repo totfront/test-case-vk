@@ -1,0 +1,14 @@
+.input-field__text-area {
+  display: flex;
+  overflow: hidden;
+
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 245px;
+  margin-right: 5px;
+
+  resize: none;
+
+  border: none;
+  outline: none;
+}

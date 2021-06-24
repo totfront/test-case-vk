@@ -1,0 +1,7 @@
+.popup__navbar-btn {
+  padding: 8px;
+}
+
+.popup__navbar-btn:hover {
+  cursor: pointer;
+}

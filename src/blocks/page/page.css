@@ -1,0 +1,13 @@
+.page {
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-end;
+
+  box-sizing: border-box;
+  max-width: 880px;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 0 20px;
+
+  font-family: 'SFPro-regular', ‘Arial’, sans-serif;
+}

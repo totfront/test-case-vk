@@ -1,0 +1,21 @@
+.input-field {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 290px;
+  margin: auto;
+  padding: 9px;
+
+  border: 1px solid var(--grey);
+  border-radius: 4px;
+  background-color: white;
+
+  font-family: 'SFPro-regular', ‘Arial’, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+}

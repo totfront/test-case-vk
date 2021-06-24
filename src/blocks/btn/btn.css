@@ -1,0 +1,14 @@
+.btn {
+  display: flex;
+  align-content: center;
+  align-self: flex-start;
+
+  padding: 0;
+
+  border: none;
+  background-color: transparent;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
