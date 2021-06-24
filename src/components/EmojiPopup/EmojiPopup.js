@@ -3,7 +3,7 @@ import { emojiData } from './emojiData'
 function EmojiPopup(props) {
   const [totalEmojisPopupVisibility, setTotalEmojisPopupVisibility] = React.useState(true)
   const [recentEmojiPopupVisibility, setRecentEmojiPopupVisibility] = React.useState(false)
-  const [recentEmojis, setRecentEmojis] = React.useState([])
+
   const showTotalEmojisPopup = () => {
     setTotalEmojisPopupVisibility(true)
     setRecentEmojiPopupVisibility(false)
@@ -17,26 +17,25 @@ function EmojiPopup(props) {
     let emojiDuplicateIdx
     // Check is some of recent emojis already has last clicked emoji
     if (
-      recentEmojis.some((i, idx) => {
+      props.recentEmojis.some((i, idx) => {
         if (i === emoji) {
           emojiDuplicateIdx = idx
         }
         return i === emoji
       })
     ) {
-      setRecentEmojis(recentEmojis.splice(emojiDuplicateIdx, 1))
+      props.setRecentEmojis(props.recentEmojis.splice(emojiDuplicateIdx, 1))
     }
-    setRecentEmojis([emoji, ...recentEmojis])
+    props.setRecentEmojis([emoji, ...props.recentEmojis])
     // Check for max count, if so delete the oldest emoji
-    if (recentEmojis.length > maxRecentEmojiCounter) {
-      recentEmojis.splice(maxRecentEmojiCounter - 1, 0)
-      setRecentEmojis(recentEmojis)
+    if (props.recentEmojis.length > maxRecentEmojiCounter) {
+      props.recentEmojis.splice(maxRecentEmojiCounter - 1, 0)
+      props.setRecentEmojis(props.recentEmojis)
     }
-    props.setEmoji(emoji)
     props.onEmoji(emoji)
   }
   return (
-    <article className='popup'>
+    <article className={'popup' + (props.popupState && ' popup_opened')}>
       {totalEmojisPopupVisibility && (
         <div className='popup__emojis-container'>
           {emojiData.map((emojiType, idx) => {
@@ -66,18 +65,23 @@ function EmojiPopup(props) {
         <div className='popup__emojis-container'>
           <h4 className='popup__emojis-heading'>Последние</h4>
           <ul className='popup__emojis'>
-            {recentEmojis.map((emoji, idx) => {
-              return (
-                <li
-                  onClick={() => {
-                    handleEmojiClick(emoji)
-                  }}
-                  key={idx}
-                  className='popup__emoji'>
-                  {emoji}
-                </li>
-              )
-            })}
+            {' '}
+            {!props.recentEmojis.length ? (
+              <p>Нет использованных эмодзи</p>
+            ) : (
+              props.recentEmojis.map((emoji, idx) => {
+                return (
+                  <li
+                    onClick={() => {
+                      handleEmojiClick(emoji)
+                    }}
+                    key={idx}
+                    className='popup__emoji'>
+                    {emoji}
+                  </li>
+                )
+              })
+            )}
           </ul>
         </div>
       )}

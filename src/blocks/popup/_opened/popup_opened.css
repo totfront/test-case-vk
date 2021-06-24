@@ -1,3 +1,4 @@
 .popup_opened {
-  display: flex;
+  transition: transform 2s;
+  transform: translateY(-100%);
 }

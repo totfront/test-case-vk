@@ -1,6 +1,8 @@
 .input-field__text-area {
   display: flex;
+  overflow: hidden;
 
+  box-sizing: border-box;
   width: 100%;
   max-width: 245px;
   margin-right: 5px;
@@ -9,10 +11,4 @@
 
   border: none;
   outline: none;
-}
-
-.input-field__text-area[contenteditable]:empty::before {
-  content: 'Ваше сообщение';
-
-  color: gray;
 }
